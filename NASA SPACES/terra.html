@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Коран — 86:11 — وَالسَّمَاءِ ذَاتِ الرَّجْعِ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --glass: rgba(255,255,255,0.04);
+      --accent:#9b6cff;
+      --muted: #b6c1d9;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg) 0%, #071023 100%);color:#e6eef8;line-height:1.45}
+    .container{max-width:980px;margin:36px auto;padding:24px}
+
+    .verse-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:16px;padding:28px;box-shadow:0 8px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.03)}
+
+    .arabic{font-family:'Noto Naskh Arabic', serif;font-size:40px;text-align:center;direction:rtl;margin-bottom:12px;letter-spacing:2px}
+    .translit{font-style:italic;color:var(--muted);text-align:center;margin-bottom:14px}
+    .translation{font-weight:600;font-size:18px;text-align:center;margin-bottom:18px}
+
+    .explain{background:var(--glass);padding:16px;border-radius:12px;color:#dfe8ff}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);min-height:110px;position:relative;overflow:hidden}
+
+    .card h4{margin:0 0 8px 0;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+
+    /* simple animation */
+    .fade-up{opacity:0;transform:translateY(12px);animation:fadeUp .7s ease forwards}
+    .fade-up.delay-1{animation-delay:.12s}
+    .fade-up.delay-2{animation-delay:.24s}
+    .fade-up.delay-3{animation-delay:.36s}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+
+    /* pulse accent */
+    .accent-pill{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#6ec1ff);font-weight:700;color:#021224}
+
+    /* play button */
+    .controls{display:flex;gap:12px;justify-content:center;margin-top:18px}
+    .btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:600;background:linear-gradient(90deg,var(--accent),#5ee7b7);color:#021224}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive tweaks */
+    @media (max-width:520px){.arabic{font-size:28px;padding:4px}.container{padding:16px}}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="verse-card fade-up">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div>
+          <span class="accent-pill">Сура 86 — Алат'таквър</span>
+        </div>
+        <div style="color:var(--muted);font-size:14px">Аят 11</div>
+      </div>
+
+      <div class="arabic" lang="ar" dir="rtl">وَالسَّمَاءِ ذَاتِ الرَّجْعِ</div>
+      <div class="translit">Wa as-samā'i dhāti ar-rajʿi</div>
+      <div class="translation">«Клянусь небом возвращающим» (или: «Клянусь небом, возвращающим [дожди/воды]»).</div>
+
+      <div class="explain" style="margin-top:14px">
+        <strong>Краткое объяснение:</strong>
+        <p style="margin-top:8px">Здесь Аллах клянётся небом, которое обладает свойством «возвращения» — это можно понимать многозначно: возвращение воды в землю через дождь, круговорот воды в природе, а также возвышенные небесные явления, которые приходят и уходят по Его воле. Этот аят подчёркивает, что небеса и вселенная принадлежат Господу и управляются Его милостью; человек не способен постичь всю глубину мироздания без Божьей помощи.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card fade-up delay-1">
+          <h4>Смысл «возвращения»</h4>
+          <p>Круговорот воды — облака приносят дождь, вода возвращается в землю и поддерживает жизнь.</p>
+        </article>
+
+        <article class="card fade-up delay-2">
+          <h4>Космологический смысл</h4>
+          <p>Небеса как порядок и законы мироздания: восход и заход небесных тел, циклы и закономерности.</p>
+        </article>
+
+        <article class="card fade-up delay-3">
+          <h4>Духовный урок</h4>
+          <p>Всё — от Создателя; человеку дана способность изучать творение, но знание полно лишь с милостью Аллаха.</p>
+        </article>
+
+        <article class="card fade-up">
+          <h4>Как это показать на сайте?</h4>
+          <p>Добавьте перевод, пояснение и аудио-чтение с возможностью включить/остановить — это помогает посетителям понять аят глубже.</p>
+        </article>
+      </div>
+
+      <div class="controls">
+        <!-- Плейер: замените src на реальную ссылку на чтение/рекитацию -->
+        <audio id="recitation" src="" preload="none"></audio>
+        <button class="btn" id="playBtn">▶️ Воспроизвести чтение</button>
+        <button class="btn secondary" id="pauseBtn">⏸ Остановить</button>
+      </div>
+
+      <footer>Подсказка: чтобы добавить реальное чтение — загрузите mp3 и вставьте его URL в атрибут <code>src</code> тега <code>audio</code>.</footer>
+    </section>
+  </main>
+
+  <script>
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const audio = document.getElementById('recitation');
+
+    playBtn.addEventListener('click', ()=>{
+      if(!audio.src){
+        alert('Файл для чтения не указан. Откройте HTML и вставьте ссылку на mp3 в атрибут src тега <audio>.');
+        return;
+      }
+      audio.play();
+    });
+    pauseBtn.addEventListener('click', ()=>audio.pause());
+
+    // Небольшая анимация появления
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.querySelectorAll('.fade-up').forEach((el,i)=>{
+        el.style.animationDelay = (i*0.08)+'s';
+      });
+    });
+  </script>
+</body>
+</html>

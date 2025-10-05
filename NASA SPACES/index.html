@@ -1,0 +1,789 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Terra25</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <style>
+  :root {
+    --bg1: #00111a;
+    --bg2: #003344;
+    --card: #001d2e;
+  }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(180deg, var(--bg1), var(--bg2));
+    color: #fff;
+  }
+  .navbar {
+    background: rgba(0, 0, 0, 0.85);
+  }
+  header {
+    padding: 60px 20px;
+    text-align: center;
+  }
+  header h1 {
+    margin: 0 0 6px 0;
+    font-size: 2.2rem;
+  }
+  #map {
+    height: 420px;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  }
+  section {
+    padding: 40px 12px;
+  }
+  .card {
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    color: #fff;
+  }
+  .muted {
+    color: #cfd8dc;
+  }
+
+  #threeWrap {
+    height: 420px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  }
+  #threeUI {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 5;
+  }
+  .controlBtn {
+    margin-right: 6px;
+  }
+
+  #solarWrap {
+    background: linear-gradient(180deg, #000814, #001a2e);
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  }
+  #solarCanvas {
+    width: 100%;
+    height: 420px;
+    display: block;
+    background: transparent;
+    border-radius: 6px;
+  }
+
+  .planet-row img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.06);
+  }
+
+  footer {
+    padding: 20px;
+    text-align: center;
+    background: #000814;
+    color: #ccc;
+    margin-top: 24px;
+  }
+
+  /* Адаптация для мобильных */
+  @media (max-width: 992px) {
+    #threeWrap, #map, #solarCanvas {
+      height: 320px;
+    }
+    header h1 {
+      font-size: 1.8rem;
+    }
+    .card p, .card h5 {
+      font-size: 0.9rem;
+    }
+    .planet-row img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    header h1 {
+      font-size: 1.6rem;
+    }
+    section {
+      padding: 20px 8px;
+    }
+    .card p, .card h5 {
+      font-size: 0.85rem;
+    }
+    #map, #threeWrap, #solarCanvas {
+      height: 280px;
+    }
+    .planet-row img {
+      width: 32px;
+      height: 32px;
+      margin-right: 6px;
+    }
+    .navbar .navbar-brand {
+      font-size: 0.95rem;
+    }
+    .navbar-nav .nav-link {
+      font-size: 0.9rem;
+    }
+    table {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    #map, #threeWrap, #solarCanvas {
+      height: 220px;
+    }
+    .planet-row img {
+      width: 28px;
+      height: 28px;
+    }
+    .navbar-nav {
+      text-align: center;
+    }
+    .navbar-nav .nav-link {
+      padding: 6px 0;
+    }
+    header p.muted {
+      font-size: 0.8rem;
+    }
+  }
+</style>
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: blue;">
+  <div class="container">
+    <a class="navbar-brand" href="#">🌍 Terra25</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="приложение.html" style="color: #ffffff;">Zenit</a></li>
+        <li class="nav-item"><a class="nav-link" href="#home" style="color: #ffffff;">home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#history" style="color: #ffffff;">history</a></li>
+        <li class="nav-item"><a class="nav-link" href="#space" style="color: #fffcfc;">space</a></li>
+        <li class="nav-item"><a class="nav-link" href="#solar" style="color: #ffffff;">solar</a></li>
+        <li class="nav-item"><a class="nav-link" href="#blog" style="color: #ffffff;">blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html" style="color: #ffffff;">about us</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header id="home" style="padding-top:80px;">
+  <h1>Terra25</h1>
+  <p class="muted">Map of events, stories about Earth and space, and an interactive solar system</p>
+</header>
+
+<section class="container">
+  <div id="map" style="height:500px; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,0.6);"></div>
+</section>
+
+
+<section id="history" class="container">
+  <h2>Earth's History: Important Events (2000-2025)</h2>
+  <p class="muted">Brief notes on key events, including technological, environmental, and social developments.</p>
+
+  <div class="row gy-3 mt-3">
+    <div class="col-md-6">
+      <div class="card p-3">
+        <h5>2001 — Internet and Information</h5>
+        <p>The growth of Wikipedia, the expansion of access to knowledge, and the beginning of a new era of open data.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-3">
+        <h5>2004 — Social Media</h5>
+        <p>The emergence of Facebook and the explosive growth of social platforms that have changed the way we communicate.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card p-3">
+        <h5>2008 — Financial Shock</h5>
+        <p>The global financial crisis, banking sector reforms, and new regulations.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card p-3">
+        <h5>2010 - Natural Events</h5>
+        <p>The eruption of the Eyjafjallajokull volcano in Iceland and its impact on global aviation.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card p-3">
+        <h5>2019 — The Pandemic</h5>
+        <p>The COVID-19 Outbreak: Global Changes in Healthcare, the Economy, and Lifestyle</p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card p-3">
+        <h5>2022 — James Webb</h5>
+        <p>Запуск и первые научные изображения космоса, новый этап астрофизики.</p>
+      </div>
+    </div>
+
+    <div class="col-12 mt-3">
+      <div class="card p-3">
+        <h5>2025 — Ecology and Energy</h5>
+        <p>Active initiatives on green energy and ecosystem restoration programs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="space" class="container">
+  <h2>Cosmos — stories and discoveries</h2>
+  <p class="muted">A few notes about space missions, stars, and exploration.</p>
+
+  <div class="row gy-3 mt-3">
+    <div class="col-md-8">
+      <div id="threeWrap">
+        <div id="threeUI" class="text-white">
+          <button id="prevCard" class="btn btn-sm btn-outline-light controlBtn">◀</button>
+          <button id="nextCard" class="btn btn-sm btn-outline-light controlBtn">▶</button>
+          <input id="cardSlider" type="range" min="0" max="4" value="0" style="width:260px; vertical-align:middle; margin-left:6px;">
+        </div>
+  
+        <div id="threeContainer" style="width:100%; height:100%;"></div>
+      </div>
+    </div>
+
+<div class="col-md-4">
+  <div class="card p-3 mb-3">
+    <img src="image/telesskop.jpg" class="card-img-top rounded mb-2" alt="James Webb Telescope">
+    <h5 class="card-title">James Webb Telescope (2021–)</h5>
+    <p class="card-text ">Deepest infrared images of early space, allowing us to study the formation of the first galaxies and stars.</p>
+  </div>
+
+  <div class="card p-3 mb-3">
+    <img src="image/marsrev.jpg" class="card-img-top rounded mb-2" alt="Martian missions">
+    <h5 class="card-title">Martian missions</h5>
+    <p class="card-text">The Perseverance and Ingenuity rovers are exploring the surface of Mars, collecting samples, and searching for traces of ancient life.</p>
+  </div>
+
+  <div class="card p-3 mb-3">
+    <img src="image/blackdira.jpg" class="card-img-top rounded mb-2" alt="Black holes">
+    <h5 class="card-title">Black holes</h5>
+    <p class="card-text">Objects with strong gravity that cannot emit light. They help us study the structure and evolution of the universe.</p>
+  </div>
+
+
+  <div class="card p-3">
+    <img src="image/explanet.jpg" class="card-img-top rounded mb-2" alt="Exoplanets">
+    <h5 class="card-title">Exoplanets</h5>
+    <p class="card-text">Thousands of exoplanet discoveries have been made, and some of them are located in the "habitable zone" and can support life.</p>
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+<section id="solar" class="container">
+  <h2>Interactive Solar System - Planetary Orbits</h2>
+  <p class="muted">Below is a visualization of the orbits (simplified scales). The slider controls the time (speed/positions of the planets).</p>
+
+  <div id="solarWrap" class="mt-3">
+    <canvas id="solarCanvas"></canvas>
+
+    <div class="d-flex align-items-center justify-content-between mt-3">
+      <div class="planet-row d-flex align-items-center">
+
+        <img src="image/sunjpg.jpg" alt="Sun" title="Расстояние от Солнца (км)" >
+        <img src="image/mercurijpg.jpg" alt="Mercury" title="Mercury 57 910 000 км">
+        <img src="image/venus.jpg" alt="Venus" title="Venus 108 200 000 км">
+        <img src="image/earth.jpg" alt="Earth" title="Earth 149 600 000 км">
+        <img src="image/Marsjpg.jpg" alt="Mars" title="Mars 227 940 000 км">
+        <img src="image/jupiter.jpg" alt="Jupiter" title="Jupiter 778 330 000 км">
+        <img src="image/saturnjpg.jpg" alt="Saturn" title="Saturn 1 429 400 000 км">
+        <img src="image/111jpg.jpg" alt="Uranus" title="Uranus 2 870 990 000 км">
+        <img src="image/neptun.jpg" alt="Neptune" title="Neptune 4 504 000 000 км">
+      </div>
+
+      <div style="width:55%;">
+        <div class="d-flex gap-2 align-items-center justify-content-end">
+          <button id="playBtn" class="btn btn-sm btn-outline-light">Play ▶</button>
+          <button id="pauseBtn" class="btn btn-sm btn-outline-light">Pause ⏸</button>
+          <input id="timeSliderSolar" type="range" min="0" max="10000" value="0" style="width:70%;">
+        </div>
+      </div>
+    </div>
+    <section id="solar" class="container my-5">
+  <h2>The solar system — distances to the planets</h2>
+  <p class="text-muted">Average distances from the Sun to each planet in kilometers and astronomical units (AU)</p>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-striped table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Planet</th>
+          <th>Distance from the Sun (km)</th>
+          <th>Distance from the Sun (AU)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Венера</td>
+          <td>57 910 000</td>
+          <td>0.39</td>
+        </tr>
+        <tr>
+          <td>Венера</td>
+          <td>108 200 000</td>
+          <td>0.72</td>
+        </tr>
+        <tr>
+          <td>Earth</td>
+          <td>149 600 000</td>
+          <td>1.00</td>
+        </tr>
+        <tr>
+          <td>Mars</td>
+          <td>227 940 000</td>
+          <td>1.52</td>
+        </tr>
+        <tr>
+          <td>Jupiter</td>
+          <td>778 330 000</td>
+          <td>5.20</td>
+        </tr>
+        <tr>
+          <td>Saturn</td>
+          <td>1 429 400 000</td>
+          <td>9.58</td>
+        </tr>
+        <tr>
+          <td>Uran</td>
+          <td>2 870 990 000</td>
+          <td>19.22</td>
+        </tr>
+        <tr>
+          <td>Neptun</td>
+          <td>4 504 000 000</td>
+          <td>30.05</td>
+        </tr>
+        <tr>
+          <td>Pluto* (dwarf planet)</td>
+          <td>5 906 380 000</td>
+          <td>39.48</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-muted"><small>* Pluto is a dwarf planet</small></p>
+</section>
+
+  </div>
+</section>
+
+<section id="blog" class="container">
+  <h2>Blog</h2>
+  <div class="row mt-3 gy-3">
+    <div class="col-md-6">
+      <div class="card p-3 d-flex flex-row align-items-start">
+        <img src="image/2000.jpg" alt="Технологии" style="width:80px; height:80px; object-fit:cover; border-radius:8px; margin-right:12px;">
+        <div>
+          <h5> <a href="https://en.wikipedia.org/wiki/Science_and_technology_studies?ysclid=mgck4hzt3i975747402">Technology and science</a></h5>
+          <p class="muted">Since 2000, technology has accelerated: mobile networks, cloud services, and AI. Space science has gained new tools, such as telescopes and missions..</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-3 d-flex flex-row align-items-start">
+        <img src="image/2026.jpg" alt="Марс 2026" style="width:80px; height:80px; object-fit:cover; border-radius:8px; margin-right:12px;">
+        <div>
+          <h5><a href="https://theconversation.com/researchers-warn-we-could-run-out-of-data-to-train-ai-by-2026-what-then-216741">Future of Research (2026)</a></h5>
+          <p class="muted">In 2026, active research on Mars is planned: robots and satellites will search for traces of life, analyze water and minerals, and scientists will test the feasibility of future manned missions..</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-3 d-flex flex-row align-items-start">
+        <img src="image/2030.jpg" alt="Телескоп 2030" style="width:80px; height:80px; object-fit:cover; border-radius:8px; margin-right:12px;">
+        <div>
+          <h5><a href="https://drive.google.com/file/d/1HozURtwLmitXlAXb1hnWPk1MsnSQg9V0/view?usp=sharing">Future of Research (2030)</a></h5>
+          <p class="muted">By 2030, we can expect manned missions to the Moon and Mars, new telescopes for studying exoplanets, and advanced robotic missions to search for life and resources.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-3 d-flex flex-row align-items-start">
+        <img src="image/2035.jpg" alt="Марс 2035" style="width:80px; height:80px; object-fit:cover; border-radius:8px; margin-right:12px;">
+        <div>
+          <h5><a href="http://futuretimeline.net/">Colonization and Mars (2035)</a></h5>
+          <p class="muted">In 2035, it is planned to build the first houses on Mars, use rockets and robots to transport resources. People will be able to fly to Mars for research, as well as study Earth from space and new technologies for living on other planets.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section id="reviews" class="container mt-4">
+  <h2>Reviews</h2>
+  <div class="card p-3 mt-2">🌟 "A cool visual map and a section about space." — Marina A</div>
+</section>
+<footer style="background-color: rgb(52, 52, 112);">
+
+   <p class="muted">  ©The Future of Earth and Space 📧<a href="aliboevumar91@gmail.com" style="color: #ccc; border-color: #fff;">aliboevumar91@gmail.com </a> • 📱 +992 00 299 70 99• 📍 Dushanbe, Tajikistan</p>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map = L.map('map', { preferCanvas:true }).setView([20,0], 2);
+
+// Красивый слой
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution:'© OpenStreetMap contributors'
+}).addTo(map);
+
+// События
+const historicalEvents = [
+  {year:2001, title:'Всплеск онлайн-энциклопедий (Википедия)', coords:[51.5,-0.1], type:'tech'},
+  {year:2003, title:'Spirit — марсоход NASA', coords:[-14.6,175.5], type:'nasa'},
+  {year:2004, title:'Opportunity — марсоход NASA', coords:[-1.9,354.5], type:'nasa'},
+  {year:2004, title:'Рост социальных сетей', coords:[37.56,-122.3], type:'tech'},
+  {year:2006, title:'Старт миссии New Horizons к Плутону', coords:[28.6,-80.6], type:'nasa'},
+  {year:2008, title:'Финансовый кризис', coords:[40.71,-74.01], type:'event'},
+  {year:2010, title:'Извержение вулкана Эйяфьятлайокудль', coords:[64.1,-21], type:'event'},
+  {year:2012, title:'Curiosity — марсоход на Марсе', coords:[-4.5,137.4], type:'nasa'},
+  {year:2015, title:'Обнаружение воды на Марсе', coords:[-14.6,175.5], type:'nasa'},
+  {year:2018, title:'InSight — миссия на Марс', coords:[4.5,135.9], type:'nasa'},
+  {year:2019, title:'Пандемия COVID-19', coords:[31.2,121.5], type:'event'},
+  {year:2020, title:'Perseverance и Ingenuity на Марсе', coords:[18.4,77.5], type:'nasa'},
+  {year:2021, title:'James Webb Telescope — запуск и первые фото', coords:[30.0,-100.0], type:'nasa'},
+  {year:2024, title:'Планируемая миссия Artemis I (Луна)', coords:[28.6,-80.6], type:'nasa'},
+  {year:2025, title:'Artemis II/III — пилотируемые миссии на Луну', coords:[28.6,-80.6], type:'nasa'},
+  {year:2025, title:'Зелёная энергетика — проекты по всему миру', coords:[52.5,13.4], type:'event'}
+];
+
+const typeColors = {
+  nasa: '#1f78b4',    // синий для NASA
+  tech: '#33a02c',    // зеленый для технологий
+  event: '#e31a1c'    // красный для глобальных событий
+};
+
+let index = 0;
+const markers = [];
+
+function addNextMarker() {
+  if(index >= historicalEvents.length) return;
+
+  const e = historicalEvents[index];
+
+  const marker = L.circleMarker(e.coords, {
+    radius: 8,
+    color: typeColors[e.type],
+    fillColor: typeColors[e.type],
+    fillOpacity: 0,
+    weight: 2
+  }).addTo(map)
+    .bindPopup(`<b>${e.year}</b><br>${e.title}`);
+  
+  markers.push(marker);
+
+  // Плавное появление
+  let opacity = 0;
+  const fadeIn = setInterval(()=>{
+    opacity += 0.05;
+    marker.setStyle({fillOpacity: opacity});
+    if(opacity >= 0.9) clearInterval(fadeIn);
+  }, 30);
+
+  index++;
+  setTimeout(addNextMarker, 600);
+}
+
+// Пульс всех маркеров
+function pulseMarkers() {
+  markers.forEach(marker => {
+    const r = marker.options.radius;
+    marker.setStyle({radius: r + 2});
+    setTimeout(()=> marker.setStyle({radius: r}), 400);
+  });
+  setTimeout(pulseMarkers, 1200);
+}
+
+addNextMarker();
+setTimeout(pulseMarkers, 2000);
+
+
+
+historicalEvents.forEach(e => {
+  L.marker(e.coords).addTo(map).bindPopup(`<b>${e.year}</b><br>${e.title}`);
+});
+
+(function(){
+  const container = document.getElementById('threeContainer');
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+
+
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  container.appendChild(renderer.domElement);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, container.clientWidth/container.clientHeight, 0.1, 1000);
+  camera.position.z = 6;
+
+
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(5,5,5);
+  scene.add(light);
+  scene.add(new THREE.AmbientLight(0x888888));
+
+  const cardsData = [
+    {title:'James Webb', text:'Глубокий инфракрасный взгляд в ранний космос.'},
+    {title:'Марс: Perseverance', text:'Ровер исследует марсианскую поверхность.'},
+    {title:'Экзопланеты', text:'Открытые миры в зоне обитаемости.'},
+    {title:'Сверхновые', text:'Катастрофы, создающие тяжёлые элементы.'},
+    {title:'Будущее', text:'Пилотируемые миссии и новые технологии.'}
+  ];
+
+  function makeCardTexture(title, text, w=512, h=320){
+    const c = document.createElement('canvas'); c.width=w; c.height=h;
+    const ctx = c.getContext('2d');
+
+    ctx.fillStyle = '#081426'; ctx.fillRect(0,0,w,h);
+
+    ctx.fillStyle = '#fff'; ctx.font = '36px sans-serif'; ctx.fillText(title, 28, 60);
+
+    ctx.fillStyle = '#cbd5da'; ctx.font = '18px sans-serif';
+    wrapText(ctx, text, 28, 100, w-56, 24);
+    return new THREE.CanvasTexture(c);
+  }
+  function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+    const words = text.split(' ');
+    let line = '';
+    for (let n=0; n<words.length; n++){
+      const testLine = line + words[n] + ' ';
+      const metrics = ctx.measureText(testLine);
+      if (metrics.width > maxWidth && n>0) {
+        ctx.fillText(line, x, y);
+        line = words[n] + ' ';
+        y += lineHeight;
+      } else {
+        line = testLine;
+      }
+    }
+    ctx.fillText(line, x, y);
+  }
+
+
+  const group = new THREE.Group();
+  const radius = 4.0;
+  const cardMeshes = [];
+  for (let i=0;i<cardsData.length;i++){
+    const tex = makeCardTexture(cardsData[i].title, cardsData[i].text);
+    const mat = new THREE.MeshStandardMaterial({map:tex, side:THREE.DoubleSide});
+    const geo = new THREE.PlaneGeometry(3.2,2);
+    const m = new THREE.Mesh(geo, mat);
+    const ang = i * (Math.PI*2 / cardsData.length);
+    m.position.set(Math.cos(ang)*radius, Math.sin(ang)*0.2, Math.sin(ang)*radius*0.2);
+    m.lookAt(0,0,0);
+    group.add(m);
+    cardMeshes.push(m);
+  }
+  scene.add(group);
+
+  
+  let rot = 0;
+  let targetIndex = 0;
+  const slider = document.getElementById('cardSlider');
+  const prevBtn = document.getElementById('prevCard');
+  const nextBtn = document.getElementById('nextCard');
+
+  function animate(){
+    requestAnimationFrame(animate);
+   
+    rot += 0.002;
+    group.rotation.y = rot;
+ 
+    const desired = -targetIndex * (Math.PI*2 / cardsData.length);
+    group.rotation.y += (desired - group.rotation.y) * 0.08;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+
+  function setIndex(i){
+    targetIndex = ((i % cardsData.length)+cardsData.length)%cardsData.length;
+    slider.value = targetIndex;
+  }
+  slider.max = cardsData.length - 1;
+  slider.addEventListener('input', ()=> setIndex(parseInt(slider.value,10)));
+  prevBtn.addEventListener('click', ()=> setIndex(targetIndex-1));
+  nextBtn.addEventListener('click', ()=> setIndex(targetIndex+1));
+
+
+  window.addEventListener('resize', ()=> {
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    camera.aspect = container.clientWidth/container.clientHeight;
+    camera.updateProjectionMatrix();
+  });
+})();
+
+
+(function(){
+  const canvas = document.getElementById('solarCanvas');
+  
+  function resizeCanvas(){
+    canvas.width = canvas.clientWidth * devicePixelRatio;
+    canvas.height = canvas.clientHeight * devicePixelRatio;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', ()=> { resizeCanvas(); drawFrame(currentT); });
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+
+
+  const planets = [
+    {name:'Sun', r:0, size:30, color:'#ffcc33', img:'image/sunjpg.jpg'},
+    {name:'Mercury', r:50, size:4, period:88, img:'image/mercurijpg.jpg'},
+    {name:'Venus', r:80, size:7, period:225, img:'image/venus.jpg'},
+    {name:'Earth', r:110, size:8, period:365, img:'image/earth.jpg'},
+    {name:'Mars', r:145, size:6, period:687, img:'image/Marsjpg.jpg'},
+    {name:'Jupiter', r:200, size:18, period:4333, img:'image/jupiter.jpg'},
+    {name:'Saturn', r:260, size:16, period:10759, img:'image/saturnjpg.jpg'},
+    {name:'Uranus', r:320, size:12, period:30687, img:'image/111jpg.jpg'},
+    {name:'Neptune', r:360, size:12, period:60190, img:'image/neptun.jpg'}
+  ];
+
+  const imgCache = {};
+  planets.forEach(p => {
+    const im = new Image(); im.src = p.img;
+    imgCache[p.name] = im;
+  });
+
+  function center(){
+    const rect = canvas.getBoundingClientRect();
+    return { x: rect.width/2, y: rect.height/2 };
+  }
+
+
+  let currentT = 0;
+  let isPlaying = false;
+  const playBtn = document.getElementById('playBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const timeSlider = document.getElementById('timeSliderSolar');
+
+  function drawFrame(t){
+  
+    const rect = canvas.getBoundingClientRect();
+    ctx.clearRect(0,0,rect.width,rect.height);
+    const c = center();
+
+
+    ctx.fillStyle = '#000814';
+    ctx.fillRect(0,0,rect.width,rect.height);
+
+    
+    ctx.strokeStyle = 'rgba(200,200,255,0.06)';
+    ctx.lineWidth = 1;
+    planets.forEach((p, idx) => {
+      if (p.r <= 0) return;
+      ctx.beginPath();
+      ctx.ellipse(c.x, c.y, p.r, p.r, 0, 0, Math.PI*2);
+      ctx.stroke();
+    });
+
+   
+    const sun = planets[0];
+    ctx.beginPath();
+    ctx.fillStyle = sun.color;
+    ctx.arc(c.x, c.y, sun.size, 0, Math.PI*2);
+    ctx.fill();
+
+    planets.slice(1).forEach(p => {
+
+      const ang = (t / p.period) * Math.PI*2;
+      const x = c.x + Math.cos(ang) * p.r;
+      const y = c.y + Math.sin(ang) * p.r;
+
+      ctx.beginPath();
+      ctx.fillStyle = '#fff';
+      ctx.arc(x, y, p.size, 0, Math.PI*2);
+      ctx.fill();
+
+      
+      const im = imgCache[p.name];
+      if (im && im.complete) {
+        const iw = p.size*2.4;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, p.size+2, 0, Math.PI*2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(im, x - iw/2, y - iw/2, iw, iw);
+        ctx.restore();
+      }
+    });
+
+  
+  }
+
+
+  let last = performance.now();
+  function loop(now){
+    if (!isPlaying) { requestAnimationFrame(loop); return; }
+    const dt = (now - last) / 1000; 
+    last = now;
+    currentT += dt * 40; 
+    if (currentT > 100000) currentT = currentT % 100000;
+    timeSlider.value = Math.floor(currentT % 10000);
+    drawFrame(currentT);
+    requestAnimationFrame(loop);
+  }
+
+  // controls
+  playBtn.addEventListener('click', ()=>{
+    if (!isPlaying){ isPlaying = true; last = performance.now(); loop(last); }
+  });
+  pauseBtn.addEventListener('click', ()=> { isPlaying = false; });
+
+  timeSlider.addEventListener('input', (e)=>{
+    isPlaying = false;
+    currentT = parseInt(e.target.value, 10);
+    drawFrame(currentT);
+  });
+
+  // initial draw
+  drawFrame(currentT);
+})();
+
+</script>
+</body>
+</html>

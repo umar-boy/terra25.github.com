@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About us — The Data Custodians Team</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="index.html">
+  <style>
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(180deg, #00111a, #003344);
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+
+  header h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 120px;
+    font-weight: bold;
+  }
+  header p {
+    font-size: 1.2rem;
+    color: #cfd8dc;
+  }
+
+  .card {
+    background: rgba(0, 0, 0, 0.45);
+    border: none;
+    color: #fff;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 1.2s ease;
+    border-radius: 15px;
+  }
+  .card.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+  }
+
+
+  img {
+    transition: transform 1s ease, filter 1s ease;
+    cursor: pointer;
+    border-radius: 12px;
+    max-width: 100%;
+    height: auto;
+  }
+  img:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.3);
+  }
+
+
+  .video-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 255, 255, 0.5);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 1s ease;
+  }
+  .video-wrap.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .video-wrap:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 60px rgba(0, 255, 255, 0.7);
+  }
+  .video-wrap video {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+  }
+
+  .team-card {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 20px;
+    transition: transform 0.8s ease, box-shadow 0.8s ease;
+    transform: translateY(50px);
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .team-card.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .team-card:hover {
+    transform: translateY(-10px) rotateY(10deg) scale(1.08);
+    box-shadow: 0 20px 60px rgba(0, 255, 255, 0.7);
+  }
+  .team-card img {
+    transition: transform 0.8s ease, filter 0.8s ease;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+  }
+  .team-card img:hover {
+    transform: scale(1.2) rotate(10deg);
+    filter: brightness(1.3);
+  }
+
+
+  #stars, #stars2, #stars3 {
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    background: transparent;
+    z-index: 0;
+  }
+  #stars {
+    background: url('image/srar2.jpg') repeat;
+    animation: animStar 50s linear infinite;
+  }
+  #stars2 {
+    background: url('image/star2.jpg') repeat;
+    animation: animStar 100s linear infinite;
+    opacity: 0.5;
+  }
+  #stars3 {
+    background: url('') repeat;
+    animation: animStar 150s linear infinite;
+    opacity: 0.3;
+  }
+  @keyframes animStar {
+    from {background-position: 0 0;}
+    to {background-position: -10000px 5000px;}
+  }
+
+  
+  @media (max-width: 1200px) { 
+    header h1 { font-size: 2.2rem; }
+    header p { font-size: 1.1rem; }
+  }
+
+  @media (max-width: 992px) { 
+    header h1 { font-size: 2rem; margin-top: 90px; }
+    .team-card img { width: 120px; height: 120px; }
+    .card { padding: 25px; }
+  }
+
+  @media (max-width: 768px) { 
+    header h1 { font-size: 1.8rem; margin-top: 70px; }
+    header p { font-size: 1rem; }
+    .card { padding: 20px; }
+    .team-card img { width: 100px; height: 100px; }
+    .navbar-brand { font-size: 0.9rem; }
+  }
+
+  @media (max-width: 576px) { 
+    header h1 { font-size: 1.5rem; margin-top: 60px; }
+    header p { font-size: 0.9rem; }
+    .card { padding: 15px; }
+    .team-card img { width: 80px; height: 80px; }
+    h2 { font-size: 1.6rem !important; }
+  }
+  </style>
+</head>
+<body>
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">🌍 Terra25</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html" style="color: #ffffff;">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html" style="color: #ffffff;">About us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <h1>About Us - Data Guardians Team</h1>
+    <p class="text-center muted">Over the past 25 years, NASA and the Terra satellite have changed our understanding of Earth and space...
+</p>
+  </header>
+
+
+  <section id="about" class="container mt-5">
+    <div class="row gy-5 align-items-center">
+      <div class="col-md-6">
+        <div class="card p-5 mb-4">
+          <h5>NASA's Achievements in 25 Years</h5>
+          <ul>
+            <li>2000–2025: The Terra satellite, collected data on the climate.</li>
+            <li>Mars missions: Spirit, Opportunity, <li>
+            <li>Curiosity, Perseverance.</li>
+            <li>Telescopes: Hubble, James Webb, study of black holes, exoplanets.</li>
+          </ul>
+        </div>
+        <div class="card p-5 mb-4">
+          <h5>Our mission</h5>
+          <ul>
+            <li>Build life on Mars.</li>
+            <li>Create rockets for safe flights.</li>
+            <li>Explore space for future generations.</li>
+            <li>Save and analyze Earth data.</li>
+          </ul>
+        </div>
+        <div class="card p-5">
+          <h5>The future of our team</h5>
+          <ul>
+           <li>2026: Manned missions to Mars.</li>
+            <li>2030: Autonomous Martian settlements.</li>
+              <li>AI for interplanetary exploration.</li>
+                <li>Preservation of life on Earth and Mars.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="image/наса.jpg" alt="NASA Logo" class="img-fluid mb-3 rounded shadow-lg">
+        <img src="image/marsrev.jpg" alt="Марс миссия" class="img-fluid mb-3 rounded shadow-lg">
+        <img src="image/telesskop.jpg" alt="Телескоп James Webb" class="img-fluid rounded shadow-lg">
+      </div>
+    </div>
+  </section>
+
+<section id="space-videos" class="container mt-5">
+  <h2 class="text-center mb-4" style="font-size:2.2rem; font-weight:bold;">Short videos about space</h2>
+  <p class="text-center muted mb-5" style="font-size:1.1rem;">Watch NASA explore Earth and Mars.</p>
+  
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-3 text-center">
+      <div class="video-wrap">
+        <iframe src="https://drive.google.com/file/d/1Xnm1guFc_lYRpdYZJmyGUbjCujSTduq5/preview" width="100%" height="240" allow="autoplay"></iframe>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 text-center">
+      <div class="video-wrap">
+        <iframe src="https://drive.google.com/file/d/1AmnM468XpQeAG3a-g2rVFSA-_uGUktP8/preview" width="100%" height="240" allow="autoplay"></iframe>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 text-center">
+      <div class="video-wrap">
+        <iframe src="https://drive.google.com/file/d/12zsUkGVjMDjSKQoU1wm7vPRe-Unj1Ps7/preview" width="100%" height="240" allow="autoplay"></iframe>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 text-center">
+      <div class="video-wrap">
+        <iframe src="https://drive.google.com/file/d/1eeih4fZw9_QfHC1LdtmGGyqMFR7QBEFS/preview" width="100%" height="240" allow="autoplay"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+ <style>
+  /* Размеры аватарок: меняются под разные экраны */
+  .team-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* обрезает изображение, но сохраняет покрытие */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .team-img { width: 120px; height: 120px; }
+  }
+  @media (max-width: 480px) {
+    .team-img { width: 100px; height: 100px; }
+  }
+
+  .team.card {
+    border: 0;
+    background: transparent;
+    text-align: center;
+    padding: 0.75rem;
+  }
+
+  /* Немного стилей для текста */
+  .team h5 { margin-top: 0.25rem; font-weight: 700; }
+  .team p { font-size: 0.9rem; color: #6c757d; margin: 0; }
+
+  /* Если используешь звёзды (stars) — оставил контейнеры видимыми */
+  #stars, #stars2, #stars3 { position: absolute; inset: 0; pointer-events: none; }
+</style>
+
+<section id="team" class="container-fluid py-5" style="position:relative; overflow:hidden;">
+  <h2 class="text-center mb-4" style="font-size:2.5rem; font-weight:bold;">🚀 Our team is the "Data Guardians"</h2>
+  <p class="text-center text-muted mb-5" style="font-size:1.1rem;">We are future explorers, we store Earth data and dream of Mars.</p>
+
+  <div id="stars"></div><div id="stars2"></div><div id="stars3"></div>
+
+  <div class="row g-4 justify-content-center position-relative">
+    <div class="col-10 col-sm-6 col-md-4 col-lg-3 text-center">
+      <div class="team card">
+    
+        <img src="image/г.jpg" alt="Umar" class="img-fluid rounded-circle mb-3 team-img">
+        <h5>Umar</h5>
+        <p>PROGRAMMER AND TEAM CAPTAIN</p>
+      </div>
+    </div>
+
+    <div class="col-10 col-sm-6 col-md-4 col-lg-3 text-center">
+      <div class="team card">
+        <img src="image/noziy.jpg" alt="Noziy" class="img-fluid rounded-circle mb-3 team-img">
+        <h5>Noziy</h5>
+        <p>Coppywriter</p>
+      </div>
+    </div>
+
+    <div class="col-10 col-sm-6 col-md-4 col-lg-3 text-center">
+      <div class="team card">
+        <img src="image/m.jpg" alt="Munisakhon" class="img-fluid rounded-circle mb-3 team-img">
+        <h5>Munisakhon</h5>
+        <p>Designer</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <script>
+  const cards = document.querySelectorAll('.card');
+  function showCards() {
+    const triggerBottom = window.innerHeight * 0.85;
+    cards.forEach(card => {
+      const cardTop = card.getBoundingClientRect().top;
+      if(cardTop < triggerBottom){ card.classList.add('visible'); }
+    });
+  }
+  window.addEventListener('scroll', showCards); showCards();
+
+  const teamCards = document.querySelectorAll('.team-card');
+  function showTeam() {
+    const triggerBottom = window.innerHeight * 0.85;
+    teamCards.forEach(card => {
+      const cardTop = card.getBoundingClientRect().top;
+      if(cardTop < triggerBottom){ card.classList.add('visible'); }
+    });
+  }
+  window.addEventListener('scroll', showTeam); showTeam();
+
+  const videoWraps = document.querySelectorAll('.video-wrap');
+  function showVideos() {
+    const triggerBottom = window.innerHeight * 0.85;
+    videoWraps.forEach(videoWrap => {
+      const videoTop = videoWrap.getBoundingClientRect().top;
+      if(videoTop < triggerBottom){ videoWrap.classList.add('visible'); }
+    });
+  }
+  window.addEventListener('scroll', showVideos); showVideos();
+  </script>
+
+
+
+
+<section id="terraEvents" class="container my-5">
+<h2 class="text-center mb-4">How Terra helps people</h2>
+ <p class="text-center text-muted mb-5">
+ Terra has been observing the Earth for 25 years with 5 instruments: MODIS, ASTER, CERES, MISR, and MOPITT. 
+ This data helps to save lives, predict disasters, and improve the environment.
+ </p>
+  <div class="row gy-4">
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s;">
+        <img src="image/лесные пожары.jpg" class="card-img-top" alt="Лесные пожары">
+        <div class="card-body">
+   <h5 class="card-title">Forest Fires (MODIS)</h5>
+ <p class="card-text">The satellite captures fires around the world. The data helps firefighters and rescue services respond in time.</p>
+ </div>
+ </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:0.1s;">
+        <img src="image/наводение.jpg" card-img-top alt="Наводнения">
+        <div class="card-body">
+      <h5 class="card-title">Floods (MODIS)</h5>
+ <p class="card-text">MODIS detects flooded areas, helping authorities to evacuate people and save cities.</p>
+ </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:0.2s;">
+        <img src="image/zacukha.jpg" class="card-img-top" alt="Засуха">
+        <div class="card-body">
+       <h5 class="card-title">Drought (MODIS)</h5>
+ <p class="card-text">The satellite shows areas of drought, helping farmers plan their crops and use water efficiently.</p>
+ </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:0.3s;">
+        <img src="image/ecologiy.jpg" class="card-img-top" alt="Загрязнение воздуха">
+        <div class="card-body">
+       <h5 class="card-title">Air pollution (MISR)</h5>
+ <p class="card-text">MISR monitors smoke and aerosols, alerting residents to unhealthy air and helping to reduce emissions.</p>
+ </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:0.4s;">
+        <img src="image/vulcani.jpg" class="card-img-top" alt="Вулканы">
+        <div class="card-body">
+     <h5 class="card-title">Volcanoes (ASTER)</h5>
+ <p class="card-text">ASTER monitors volcanoes, allowing for timely warnings to the public about potential eruptions.</p>
+ </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:0.5s;">
+        <img src="image/tayfuni.jpg" class="card-img-top" alt="Тайфуны">
+        <div class="card-body">
+       <h5 class="card-title">Typhoons (ASTER)</h5>
+ <p class="card-text">ASTER helps forecast typhoons and storms, reducing the risk of destruction and loss of life among the population.</p>
+ </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:0.6s;">
+        <img src="image/globalniy.jpg" class="card-img-top" alt="Глобальное потепление">
+        <div class="card-body">
+        <h5 class="card-title">Global Warming (CERES)</h5>
+ <p class="card-text">CERES analyzes Earth's temperature, helping to plan measures to protect populations and ecosystems.</p>
+ </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:0.7s;">
+        <img src="image/indanezy.jpg" class="card-img-top" alt="Пожары в Индонезии">
+        <div class="card-body">
+       <h5 class="card-title">Fires in Indonesia (MODIS)</h5>
+ <p class="card-text">MODIS captures forest fires and smoke, helping governments respond and evacuate people in a timely manner.</p>
+ </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:0.8s;">
+        <img src="image/lednikov.jpg" class="card-img-top" alt="Таяние ледников">
+        <div class="card-body">
+       <h5 class="card-title">Glacier Melting (ASTER)</h5>
+ <p class="card-text">ASTER tracks the melting of ice, which helps predict sea levels and protect coastal cities.</p>
+ </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:0.9s;">
+        <img src="image/urajay.jpg" class="card-img-top" alt="Растительность">
+        <div class="card-body">
+      <h5 class="card-title">Vegetation and Crops (MODIS)</h5>
+ <p class="card-text">MODIS tracks plant growth, helping farmers plan crops and prevent hunger.</p>
+ </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 wow fadeInUp" style="transition: transform 0.3s; transition-delay:1s;">
+        <img src="image/ugarniy.jpg" class="card-img-top" alt="Угарный газ">
+        <div class="card-body">
+       <h5 class="card-title">Carbon Monoxide (MOPITT)</h5>
+ <p class="card-text">MOPITT measures the concentration of carbon monoxide in the atmosphere, helping cities prevent poisoning and monitor air quality.</p>
+ </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<script>
+  const cardss = document.querySelectorAll('.wow');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.2});
+  cardss.forEach(card => observer.observe(card));
+</script>
+<hr>
+<br>
+<section id="nasaHelp" class="container-fluid py-5 nasa-section">
+<h2 class="mb-4 text-center animate__animated animate__fadeInDown animate__slow">🚀 How NASA helps people</h2>
+ <p class="text-muted text-center mb-5 animate__animated animate__fadeInUp animate__slow">
+ Data from the Terra satellite helps monitor fires, floods, pollution, and climate change.
+ </p>
+
+<div class="row g-4 justify-content-center">
+
+  <div class="col-lg-4 col-md-6 col-sm-12 wow animate__animated animate__zoomIn" data-wow-delay="0.1s">
+    <div class="video-card neon">
+      <iframe src="https://drive.google.com/file/d/1oJ1BS99t4g1H8OlNQupbFnSFQ7ZBJfBq/preview" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p class="text-center mt-3 text-glow">🔥 California Fires - MODIS</p>
+  </div>
+
+  <div class="col-lg-4 col-md-6 col-sm-12 wow animate__animated animate__flipInX" data-wow-delay="0.2s">
+    <div class="video-card neon">
+      <iframe src="https://drive.google.com/file/d/1LE4sCYVXhJLDxwoJXzZM54HaJRt5bO12/preview" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p class="text-center mt-3 text-glow">🌊 Floods in Europe — ASTER</p>
+  </div>
+
+  <div class="col-lg-4 col-md-6 col-sm-12 wow animate__animated animate__zoomIn" data-wow-delay="0.3s">
+    <div class="video-card neon">
+      <iframe src="https://drive.google.com/file/d/1T5NAJfqoL5o5Jv8cs2RCfc-TObV0h1yX/preview" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p class="text-center mt-3 text-glow">🌪 Dust Storms - MISR</p>
+  </div>
+
+  <div class="col-lg-4 col-md-6 col-sm-12 wow animate__animated animate__bounceIn" data-wow-delay="0.4s">
+    <div class="video-card neon">
+      <iframe src="https://drive.google.com/file/d/1sIl_HR7BV59MGcDUwDtB1klTEDWAtKN9/preview" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p class="text-center mt-3 text-glow">☣️ Carbon Monoxide - MOPITT</p>
+  </div>
+
+  <div class="col-lg-4 col-md-6 col-sm-12 wow animate__animated animate__fadeInUpBig" data-wow-delay="0.5s">
+    <div class="video-card neon">
+      <iframe src="https://drive.google.com/file/d/1MKEAmM5OXzHwI-fJFqrRvhsbCSmtJK9R/preview" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p class="text-center mt-3 text-glow">☀️ Radiation and clouds - CERES</p>
+  </div>
+
+  <div class="col-lg-4 col-md-6 col-sm-12 wow animate__animated animate__lightSpeedInRight" data-wow-delay="0.6s">
+    <div class="video-card neon">
+      <iframe src="https://drive.google.com/file/d/16seK_Rv2Ei3H2iNAfAQ8UWA1ghXC-Mk9/preview" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p class="text-center mt-3 text-glow">💧 Floods and Droughts — ASTER</p>
+  </div>
+
+</div>
+
+
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+</section>
+
+<style>
+.nasa-section {
+  position: relative;
+  background: linear-gradient(270deg, #0d1b2a, #1b263b, #3a0ca3, #7209b7, #4361ee, #00b4d8, #0d1b2a);
+  background-size: 1500% 1500%;
+  animation: galaxy 60s ease infinite;
+  overflow: hidden;
+}
+@keyframes galaxy {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.nasa-section::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+  animation: stars 100s linear infinite;
+  opacity: 0.4;
+}
+@keyframes stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-1000px); }
+}
+.shooting-star {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(-45deg, white, transparent);
+  animation: shooting 5s linear infinite;
+  opacity: 0.8;
+}
+.shooting-star:nth-child(2) {
+  left: 20%;
+  animation-delay: 2s;
+}
+.shooting-star:nth-child(3) {
+  left: 80%;
+  animation-delay: 4s;
+}
+@keyframes shooting {
+  0% { transform: translateY(-200px) translateX(0) rotate(45deg); opacity: 1; }
+  100% { transform: translateY(1000px) translateX(500px) rotate(45deg); opacity: 0; }
+}
+
+.video-card {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.8);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.video-card iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+}
+.video-card:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+.neon {
+  box-shadow: 0 0 20px cyan, 0 0 40px #00e5ff, 0 0 60px #00ffff;
+}
+.neon:hover {
+  box-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff, 0 0 100px #00ffff;
+}
+
+
+.text-glow {
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 0 10px cyan, 0 0 20px #00e5ff, 0 0 40px #00ffff;
+}
+
+
+@media (max-width: 768px) {
+  h2 { font-size: 1.6rem; }
+  p { font-size: 0.95rem; }
+  .video-card { border-radius: 12px; }
+  .text-glow { font-size: 0.9rem; }
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script>
+  new WOW().init();
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
